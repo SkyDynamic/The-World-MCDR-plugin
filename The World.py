@@ -11,18 +11,24 @@ PERMISSIONS = {
 
 PLUGIN_METADATA = {
     'id': 'theworld',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'name': 'The World',
     'description': 'Allows you to use the 「The World」 in Minecraft',
     'author': 'Sky_Dynamic',
     'link': 'https://github.com/SkyDynamic/The-World-MCDR-plugin'
+    'dependencies': {
+        'mcdreforged': '>=1.0.0'
 }
+
+#------可修改参数------
+stop_time_second = 5 #时停时间数，以秒为计算单位，可随意修改，别太大，建议小于10s
+#---------------------
 
 Prefix= '!!TW'
 HelpMessage='''
 §7{0} help §6显示此帮助界面
-§7{0} §6激活时间停止，并且持续5秒
-'''.strip().format(Prefix)
+§7{0} §6激活时间停止，并且持续{1}秒
+'''.strip().format(Prefix,stop_time_second)
 
 @new_thread
 def stop_time(src: CommandSource):
@@ -32,7 +38,7 @@ def stop_time(src: CommandSource):
     server.execute(f"effect give @a[name=!{src.player}] minecraft:blindness 1000 255")
     server.execute(f"effect give @a[name=!{src.player}] minecraft:jump_boost 1000 128")
     server.execute(f"tick freeze")
-    time.sleep( 5 )
+    time.sleep( stop_time_second )
     server.execute(f"tick freeze")
     server.execute(f"effect clear @a")
 
