@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
-from mcdreforged.plugin.server_interface import *
-from mcdreforged.api.decorator import *
-from mcdreforged.api.command import *
+from mcdreforged.api.all *
 
 PERMISSIONS = {
     'help': 1,
